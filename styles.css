@@ -1,3 +1,25 @@
-h1 {
-    color: red;
+body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
 }
+
+.header {
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+
+.content {
+    font-size: 17px;
+}
+
+a {
+    color: #8b0000;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ff0000;
+}
+
