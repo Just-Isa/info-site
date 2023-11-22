@@ -7,7 +7,6 @@ body {
 .header {
     font-weight: 700;
     font-size: 50px;
-    display: -webkit-flex; /* Add -webkit prefix */
     display: flex;
     align-items: center;
     flex-direction: column;
