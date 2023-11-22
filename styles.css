@@ -6,6 +6,7 @@ body {
 
 .header {
     font-weight: 700;
+    display: -webkit-flex; /* Add -webkit prefix */
     display: flex;
     align-items: center;
 }
@@ -22,4 +23,5 @@ a {
 a:hover {
     color: #ff0000;
 }
+
 
