@@ -18,8 +18,8 @@ body {
     margin: 10px 0 50px 0;
 }
 
-.header-text:hover{
-    animation: rainbow 3s infinite;
+.header-text:hover {
+    animation: rainbow 4s infinite;
 }
 
 @keyframes rainbow {
@@ -42,7 +42,7 @@ body {
     flex-direction: column;
     font-size: 25px;
     align-items: center;
-    gap: 50px;
+    gap: 40px;
     text-align: center;
 }
 
@@ -70,7 +70,6 @@ a::before {
     transition: transform 0.3s ease-in-out;
 }
 
-
 a:hover::before {
     transform: scaleX(1);
 }
@@ -81,7 +80,6 @@ a:hover::before {
     position: relative;
     max-width: 50%;
 }
-
 
 .text::before {
     content: "";
@@ -97,26 +95,45 @@ a:hover::before {
 }
 
 
-a:hover {
-    color: #ff3333;
-}
-
 .email-link {
-    color: #ff3333;
-    text-decoration: none;
-    position: relative;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #111111;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .email-link::before {
     content: "";
     position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
+    bottom: 15px;
+    left: 17px;
+    width: 90%;
     height: 2px;
-    background: #ff3333;
+    background: #007bff;
     background-size: 200% auto;
     background-position: 0 0;
+}
+
+.headline {
+    font-size: 35px;
+    font-weight: bold;
+    color: lightgrey;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+.project-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #111111;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .dead-link {
@@ -138,10 +155,15 @@ a:hover {
     }
 }
 
+.projects {
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
 
 .working-projects {
-    display:flex;
-    gap:15px;
+    display: flex;
+    gap: 15px;
     align-items: center;
     justify-content: center;
 }
@@ -154,10 +176,9 @@ a:hover {
     animation: working 2s ease-in-out infinite;
 }
 
-
 .loading-projects {
-    display:flex;
-    gap:15px;
+    display: flex;
+    gap: 15px;
     align-items: center;
     justify-content: center;
 }
@@ -187,12 +208,11 @@ a.dead-link {
 }
 
 @media only screen and (max-width: 600px) {
-
     .text {
         max-width: 100%;
     }
 
-    .header {
+    .header-container {
         margin-top: 25px;
         font-weight: 700;
         font-size: 30px; /* Increased font size for mobile */
@@ -220,7 +240,7 @@ a.dead-link {
         transform: scaleX(0);
     }
 
-    a{
+    a {
         color: #ff3333;
         text-decoration: underline;
     }
@@ -228,7 +248,4 @@ a.dead-link {
     a:hover::before {
         transform: scaleX(0);
     }
-
 }
-
-
