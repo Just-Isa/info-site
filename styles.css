@@ -4,14 +4,36 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.header {
-    margin-top: 25px;
+.header-container {
     font-weight: 700;
     font-size: 50px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
+}
+
+.header-text {
+    color: #ff3333;
+    margin: 10px 0 50px 0;
+}
+
+.header-text:hover{
+    animation: rainbow 3s infinite;
+}
+
+@keyframes rainbow {
+    0% { color: #ff3333; }
+    10% { color: orange; }
+    20% { color: yellow; }
+    30% { color: green; }
+    40% { color: blue; }
+    50% { color: indigo; }
+    60% { color: violet; }
+    70% { color: purple; }
+    80% { color: pink; }
+    90% { color: cyan; }
+    100% { color: #ff3333; }
 }
 
 .content {
@@ -21,30 +43,192 @@ body {
     font-size: 25px;
     align-items: center;
     gap: 50px;
+    text-align: center;
 }
 
 .break-line-horizontal {
-    width: 50%;
+    width: 70%;
     height: 1px;
-    background-color: #ff3333; /* Brighter red color */
+    background-color: #8b0000;
 }
 
 a {
-    color: #8b0000;
+    color: #ff3333;
     text-decoration: none;
+    position: relative;
+}
+
+a::before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ff3333;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+
+a:hover::before {
+    transform: scaleX(1);
 }
 
 .text {
     color: #ccc;
     text-decoration: none;
+    position: relative;
+    max-width: 50%;
 }
 
-.text:hover {
-    color: #ffffff; /* Brighter red color */
+
+.text::before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: lightgrey;
+    opacity: 0.1;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out, opacity 0.8s ease-in-out;
 }
+
 
 a:hover {
-    color: #ff0000;
+    color: #ff3333;
+}
+
+.email-link {
+    color: #ff3333;
+    text-decoration: none;
+    position: relative;
+}
+
+.email-link::before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #ff3333;
+    background-size: 200% auto;
+    background-position: 0 0;
+}
+
+.dead-link {
+    opacity: 0.5;
+    color: lightgray;
+    pointer-events: none;
+    margin: 0 0 0 0;
+}
+
+@keyframes working {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
+
+.working-projects {
+    display:flex;
+    gap:15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.working-indicator {
+    width: 20px;
+    height: 20px;
+    background-color: lightgreen;
+    border-radius: 50%;
+    animation: working 2s ease-in-out infinite;
+}
+
+
+.loading-projects {
+    display:flex;
+    gap:15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-icon {
+    width: 20px;
+    height: 20px;
+    border: 2px solid lightgray;
+    border-top-color: #ff3333;
+    border-radius: 50%;
+    animation: loading 3s linear infinite;
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+a.dead-link {
+    color: #ff3333;
+    text-decoration: none !important;
+    position: relative;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .text {
+        max-width: 100%;
+    }
+
+    .header {
+        margin-top: 25px;
+        font-weight: 700;
+        font-size: 30px; /* Increased font size for mobile */
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 50px;
+    }
+
+    .quote {
+        margin-left: 30px;
+        font-size: medium; /* Increased font size for mobile */
+    }
+
+    .content {
+        font-size: 17px;
+        display: flex;
+        flex-direction: column;
+        font-size: 25px;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .text:hover::before {
+        transform: scaleX(0);
+    }
+
+    a{
+        color: #ff3333;
+        text-decoration: underline;
+    }
+
+    a:hover::before {
+        transform: scaleX(0);
+    }
+
 }
 
 
