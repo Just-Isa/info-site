@@ -4,6 +4,7 @@
     <title>Just-Isa</title>
     <link rel="stylesheet" href="styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link rel="shortcut icon" type="image/png" href="favicon.png">
 </head>
 <body>
@@ -40,37 +41,206 @@
             <a href="mailto:inquiry.just-isa@outlook.com" class="email-link">
                 inquiry.just-isa@outlook.com
             </a>
+            <div class="text save-highscore" id="save-highscore">Save your score!</div>
+            <div class="text highscores" id="highscores">Local Highscores</div>
+            <div class="text highscore-list" id="highscore-list"></div>
         </div>
     </div>
+    <script>
+        const ball = document.getElementById('stupid-ball');
+        const header = document.getElementById('header-text');
+        const highscores = document.getElementById('highscores');
+        const saveHighscore = document.getElementById('save-highscore');
+        const highscoreList = document.getElementById('highscore-list');
+
+        let maxWidth = window.innerWidth;
+        let maxHeight = window.innerHeight;
+        let currScore = 0;
+        let ballActive = false;
+        let showHighscore = false;
+        let highscoresData = [];
+        let highestHighscore = 0;
+
+        window.onload = () => {
+            const storedData = localStorage.getItem('localHighscores');
+            if (storedData) {
+                try {
+                    highscoresData = JSON.parse(storedData);
+                    if (!Array.isArray(highscoresData)) {
+                        highscoresData = [];
+                    }
+                    if (highscoresData.length > 0) {
+                        highestHighscore = Math.max(...highscoresData.map(entry => entry.score), 0);
+                    }
+                } catch (e) {
+                    highscoresData = [];
+                }
+            } else {
+                localStorage.setItem('localHighscores', JSON.stringify([]));
+            }
+        }
+
+        ball.onmouseover = () => {
+            ball.style.top = Math.random() * (maxHeight - 40) + "px";
+            ball.style.left = Math.random() * (maxWidth - 40) + "px";
+            currScore++;
+
+            if (currScore > highestHighscore) {
+                saveHighscore.style.visibility = 'visible';
+            }
+
+            if (currScore === 2) {
+                highscores.style.visibility = 'visible';
+                highscores.onclick = () => {
+                    showHighscore = !showHighscore;
+                    highscoreList.style.visibility = showHighscore ? 'visible' : 'hidden';
+                    if (showHighscore) {
+                        makeHighscoreList(highscoresData);
+                    } else {
+                        highscoreList.innerHTML = '';
+                    }
+                }
+            }
+            level = Math.floor(currScore / 50); // Adjust 50 to set level intervals
+
+            if (currScore >= 0 && currScore < 10) {
+                header.innerHTML = '✿(｡◕‿‿◕｡)✿ - Score: ' + currScore;
+            } else if (currScore >= 10 && currScore < 30) {
+                header.innerHTML = '✧(｡•̀ᴗ-)✧ - Score: ' + currScore;
+                startConfetti(10, 360);
+            } else if (currScore >= 30 && currScore < 50) {
+                header.innerHTML = '(*•̀ᴗ-)✧ - Score: ' + currScore;
+            } else if (currScore >= 50 && currScore < 70) {
+                header.innerHTML = '(ง’̀-‘)ง - Score: ' + currScore;
+                startConfetti(15, 360);
+            } else if (currScore >= 70 && currScore < 90) {
+                header.innerHTML = '(ง⌐■ ᴥ ■)ง - Score: ' + currScore;
+            } else if (currScore >= 90 && currScore < 100) {
+                header.innerHTML = '٩(◕‿◕｡)۶ - Score: ' + currScore;
+                startConfetti(25, 360);
+            } else if (currScore >= 100 && currScore < 150) {
+                header.innerHTML = 'Very nice ┏(･o･)┛ - Score: ' + currScore;
+            } else if (currScore >= 150 && currScore < 200) {
+                header.innerHTML = 'Yeaaah! ヽ(＾Д＾)ﾉ - Score: ' + currScore;
+            } else if (currScore >= 200 && currScore < 250) {
+                header.innerHTML = 'Woohoo! ╰(°▽°)╯ - Score: ' + currScore;
+                startConfetti(250, 360);
+            } else if (currScore >= 250 && currScore < 300) {
+                header.innerHTML = 'Yippie!（*＾3＾)/~☆ - Score: ' + currScore;
+            } else if (currScore >= 300 && currScore < 350) {
+                header.innerHTML = 'GOGOGOGO! ٩(◕‿◕)۶ - Score: ' + currScore;
+            } else if (currScore >= 350 && currScore < 400) {
+                header.innerHTML = 'YAY! ヾ(＠⌒ー⌒＠)ノ - Score: ' + currScore;
+            } else if (currScore >= 400 && currScore < 450) {
+                header.innerHTML = '(*≧ω≦) - Score: ' + currScore;
+                startConfetti(750, 360);
+            } else if (currScore >= 450 && currScore < 500) {
+                header.innerHTML = '＼(^o^)／ - Score: ' + currScore;
+            } else if (currScore >= 500 && currScore < 550) {
+                header.innerHTML = '＼(＾O＾)／ - Score: ' + currScore;
+            } else if (currScore >= 550 && currScore < 600) {
+                header.innerHTML = '＼(º □ º l|l)／ - Score: ' + currScore;
+            } else if (currScore >= 600 && currScore < 650) {
+                header.innerHTML = 'Uhm.. (⊙_☉) - Score: ' + currScore;
+            } else if (currScore >= 650 && currScore < 700) {
+                header.innerHTML = 'You\'re still going? ((ʘдʘ)) - Score: ' + currScore;
+            } else if (currScore >= 700 && currScore < 750) {
+                header.innerHTML = 'It might be time to stop (((ﾟДﾟ))) - Score: ' + currScore;
+            } else if (currScore >= 750 && currScore < 800) {
+                header.innerHTML = 'Stop it ((ﾟДﾟ))/ - Score: ' + currScore;
+                startConfetti(750, 360);
+                startConfetti(250, 260);
+                startConfetti(550, 160);
+                startConfetti(250, 60);
+                startConfetti(250, 0);
+            } else if (currScore >= 800 && currScore < 850) {
+                header.innerHTML = 'You probably have better things to do (＠_＠;) - Score: ' + currScore;
+            } else if (currScore >= 850 && currScore < 900) {
+                header.innerHTML = 'Dude（；￣ェ￣） - Score: ' + currScore;
+            } else if (currScore >= 900 && currScore < 950) {
+                header.innerHTML = 'QUIT（￣ー￣；） - Score: ' + currScore;
+            } else if (currScore >= 950 && currScore < 1000) {
+                header.innerHTML = 'YOU SHOULD QUIT（；゜０゜） - Score: ' + currScore;
+            } else if (currScore >= 1000 && currScore < 1009) {
+                header.innerHTML = 'ALRIGHT HERE YOU GO ARE YOU HAPPY? DO NOT GO TO 1010!!! Σ(っﾟДﾟ；)っ - Score: ' + currScore;
+                triggerConfetti(level, 20);
+            } else if (currScore >= 1010) {
+                header.innerHTML = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+                triggerConfetti(1000, 300);
+            }
+        }
+
+        header.onclick = () => {
+            if (!ballActive) {
+                ballActive = true;
+                ball.style.visibility = 'visible';
+                header.innerHTML = 'ԅ(≖‿≖ԅ)  Score: ' + currScore;
+            }
+        }
+
+        saveHighscore.onclick = () => {
+            const name = prompt("Enter your name:");
+            if (name) {
+                if (Array.isArray(highscoresData)) {
+                    highscoresData.push({ "name": name, "score": currScore });
+                    localStorage.setItem('localHighscores', JSON.stringify(highscoresData));
+                    highestHighscore = Math.max(highestHighscore, currScore);
+                    saveHighscore.style.visibility = 'hidden';
+                    alert('Highscore saved!');
+                    highscoreList.innerHTML = '';
+                    makeHighscoreList(highscoresData);
+
+                } else {
+                    console.error('Highscores data is not an array');
+                }
+            } else {
+                alert('Please enter a name');
+            }
+        }
+
+        function makeHighscoreList(data) {
+            const table = document.createElement('table');
+            table.id = 'highscore-table';
+            table.className = 'highscore-table';
+
+            const tbody = document.createElement('tbody');
+
+            data.sort((a, b) => b.score - a.score).forEach(entry => {
+                const row = document.createElement('tr');
+
+                const nameCell = document.createElement('td');
+                nameCell.innerText = entry.name;
+                row.appendChild(nameCell);
+
+                const pointsCell = document.createElement('td');
+                pointsCell.innerText = entry.score;
+                row.appendChild(pointsCell);
+
+                tbody.appendChild(row);
+            });
+
+            table.appendChild(tbody);
+            highscoreList.appendChild(table);
+        }
+
+        function startConfetti(particleCount, spread) {
+            confetti({
+                particleCount: particleCount,
+                spread: spread,
+                origin: { y: 0.5 }
+            });
+        }
+
+        function triggerConfetti(level, popcount) {
+            let intensity = Math.min(level * 100, 1000);
+            let spread = Math.min(level * 10, 360);
+
+            for (let i = 0; i < popcount; i++) {
+                setTimeout(() => {
+                    startConfetti(intensity, spread);
+                }, i * 100);
+            }
+        }
+    </script>
 </body>
-<script>
-    const ball = document.getElementById('stupid-ball');
-    const header = document.getElementById('header-text');
-    var maxWidth = window.innerWidth;
-    var maxHeight = window.innerHeight;
-    var currScore = 0;
-    var ballActive = false;
-
-    ball.onmouseover = function(){
-        ball.style.top = Math.random() * (maxHeight - 40) + 0 + "px";
-        ball.style.left = Math.random() * (maxWidth - 40) + 0 + "px";
-        currScore++;
-
-        if (currScore >= 10 && currScore < 100) {
-            header.innerHTML = '(ﾉ^_^)ﾉ - Score: ' + currScore;
-        } else if (currScore >= 100) {
-            header.innerHTML = '┏(･o･)┛ Get help ┗ (･o･) ┓ - Score: ' + currScore;
-        } else {
-            header.innerHTML = 'ԅ(≖‿≖ԅ) - Score: ' + currScore;
-        }
-    }
-
-    header.onclick = function() {
-        if (!ballActive) {
-            ballActive = true
-            ball.style.visibility = 'visible';
-            header.innerHTML = 'ԅ(≖‿≖ԅ)  Score: ' + currScore;
-        }
-    }
-</script>
 </html>
