@@ -55,7 +55,8 @@
         ball.style.top = Math.random() * (maxHeight - 40) + 0 + "px";
         ball.style.left = Math.random() * (maxWidth - 40) + 0 + "px";
         currScore++;
-        if (currScore >= 10) {
+
+        if (currScore >= 10 && currScore < 100) {
             header.innerHTML = '(ﾉ^_^)ﾉ - Score: ' + currScore;
         } else if (currScore >= 100) {
             header.innerHTML = '┏(･o･)┛ Get help ┗ (･o･) ┓ - Score: ' + currScore;
