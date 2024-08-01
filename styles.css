@@ -4,6 +4,20 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.stupid-ball {
+    position: absolute;
+    visibility: hidden;
+    border-radius: 100%;
+    background-color: #ff3333;
+    width: 25px;
+    height: 25px;
+    animation: rainbow-back 6s infinite;
+    top: 50px;
+    left: 50px;
+    transition: top 0.5s ease, left 0.5s ease;
+    z-index: 10000;
+}
+
 .header-container {
     font-weight: 700;
     font-size: 50px;
@@ -16,6 +30,7 @@ body {
 .header-text {
     color: #ff3333;
     margin: 10px 0 50px 0;
+    cursor: pointer;
 }
 
 .header-text:hover {
@@ -34,6 +49,20 @@ body {
     80% { color: pink; }
     90% { color: cyan; }
     100% { color: #ff3333; }
+}
+
+@keyframes rainbow-back {
+    0% { background-color: #ff3333; }
+    10% { background-color: orange; }
+    20% { background-color: yellow; }
+    30% { background-color: green; }
+    40% { background-color: blue; }
+    50% { background-color: indigo; }
+    60% { background-color: violet; }
+    70% { background-color: purple; }
+    80% { background-color: pink; }
+    90% { background-color: cyan; }
+    100% { background-color: #ff3333; }
 }
 
 .content {

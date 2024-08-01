@@ -7,9 +7,10 @@
     <link rel="shortcut icon" type="image/png" href="favicon.png">
 </head>
 <body>
+    <div class="stupid-ball" id="stupid-ball"></div>
     <div class="container">
         <div class="header-container">
-            <p class="header-text">ԅ(≖‿≖ԅ)</p>
+            <p class="header-text" id="header-text">ԅ(≖‿≖ԅ)</p>
         </div>
         <div class="content">
             <div class="text">
@@ -42,4 +43,33 @@
         </div>
     </div>
 </body>
+<script>
+    const ball = document.getElementById('stupid-ball');
+    const header = document.getElementById('header-text');
+    var maxWidth = window.innerWidth;
+    var maxHeight = window.innerHeight;
+    var currScore = 0;
+    var ballActive = false;
+
+    ball.onmouseover = function(){
+        ball.style.top = Math.random() * (maxHeight - 40) + 0 + "px";
+        ball.style.left = Math.random() * (maxWidth - 40) + 0 + "px";
+        currScore++;
+        if (currScore >= 10) {
+            header.innerHTML = '(ﾉ^_^)ﾉ - Score: ' + currScore;
+        } else if (currScore >= 100) {
+            header.innerHTML = '┏(･o･)┛ Get help ┗ (･o･) ┓ - Score: ' + currScore;
+        } else {
+            header.innerHTML = 'ԅ(≖‿≖ԅ) - Score: ' + currScore;
+        }
+    }
+
+    header.onclick = function() {
+        if (!ballActive) {
+            ballActive = true
+            ball.style.visibility = 'visible';
+            header.innerHTML = 'ԅ(≖‿≖ԅ)  Score: ' + currScore;
+        }
+    }
+</script>
 </html>
