@@ -19,11 +19,13 @@ body {
 }
 
 .highscores {
+    color: #ff3333 !important;
     visibility: hidden;
     cursor: pointer;
 }
 
 .highscore-list {
+    color: #8b0000;
     visibility: hidden;
 }
 
